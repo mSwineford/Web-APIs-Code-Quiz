@@ -110,7 +110,40 @@ function showScore() {
     theQuiz.style.display = "none";
     gameOver.style.display = "flex";
     clearInterval(timeInterval);
-    scoreName.value = "";
+    inputInitials.value = "";
     scoreTotal.innerHTML = "You scored" + score + "/" + quizQuestions.length + " questions.";
+}
+
+saveButton.addEventListener("click", function highscores() {
+    if (inputInitials.value === "") {
+        alert("Please enter your initials.");
+        return false;
+    } else {
+        var savedScores = JSON.parse(localStorage.getItem("savedScores")) || [];
+        var player = inputInitials.value.trim();
+        var playerScore = {
+            name: player,
+            score: score,
+        };
+        gameOver.style.display = "none";
+        scoreContainers.style.display = "flex";
+        scoreBoard.style.display = "block";
+        finishLine.style.display = "flex";
+        savedScores.push(playerScore);
+        localStorage.setItem("savedScores", JSON.stringify(savedScores));
+        generateScores();
+    }
+});
+
+function generateScores() {
+    scoreName.innerHTML = "";
+    scoreTotal.innerHTML = "";
+    var highscores = JSON.parse(localStorage.getItem("savedScores")) || [];
+    for (i=0; i<highscores.length; i++) {
+        newInitials.textContent = highscores[i].name;
+        newScore.textContent = highscores[i].name;
+        scoreName.appendChild(newInitials);
+        scoreTotal.appendChild(newScore);
+    }
 }
 
