@@ -147,3 +147,27 @@ function generateScores() {
     }
 }
 
+function showScoreBoard() {
+    startMenu.style.display = "none";
+    gameOver.style.display = "none";
+    scoreContainers.style.display = "flex";
+    scoreBoard.style.display = "block";
+    finishLine.style.display = "flex";
+    generateScores();
+}
+
+function deleteScore() {
+    window.localStorage.clear();
+    scoreName.textContent = "";
+    scoreTotal.textContent = "";
+}
+
+function playAgain() {
+    scoreContainers.style.display = "none";
+    gameOver.style.display = "none";
+    startMenu.style.display = "flex";
+    timeRemains = 60;
+    score = 0;
+    currentIndex = 0;
+}
+
