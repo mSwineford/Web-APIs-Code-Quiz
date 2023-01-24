@@ -7,11 +7,11 @@ var theQuiz = document.getElementById("quiz");
 var stopWatch = document.getElementById("clock");
 var quizQuestions = document.getElementById("questions");
 var solutions = document.getElementById("solution");
-// choices
-var choiceA = document.getElementById("a");
-var choiceB = document.getElementById("b");
-var choiceC = document.getElementById("c");
-var choiceD = document.getElementById("d");
+// answers
+var answerA = document.getElementById("a");
+var answerB = document.getElementById("b");
+var answerC = document.getElementById("c");
+var answerD = document.getElementById("d");
 
 // results
 var gameOver = document.getElementById("gameOver");
@@ -34,7 +34,7 @@ var questionsArray = [
         answerB: "booleans",
         answerC: "alerts",
         answerD: "numbers",
-        correct: "a"
+        correctAnswer: "a"
     },
     {
         question: "Arrays in javascript can be used to store ___",
@@ -42,7 +42,7 @@ var questionsArray = [
         answerB: "other arrays",
         answerC: "booleans",
         answerD: "all of the above",
-        correct: "d"
+        correctAnswer: "d"
     },
     {
         question: "String values must be enclosed within ___ when assigned to variables.",
@@ -50,7 +50,7 @@ var questionsArray = [
         answerB: "curly braces",
         answerC: "quotes",
         answerD: "square brackets",
-        correct: "b"
+        correctAnswer: "b"
     },
     {
         question: "String values must be enclosed in ___.",
@@ -58,7 +58,7 @@ var questionsArray = [
         answerB: "single quotes",
         answerC: "both a and b",
         answerD: "none of the above",
-        correct: "c"
+        correctAnswer: "c"
     },
     {
         question: "The condition of an if / else statement is closed within ___",
@@ -66,7 +66,7 @@ var questionsArray = [
         answerB: "curly brackets",
         answerC: "parentheses",
         answerD: "square bracketts",
-        correct: "c"
+        correctAnswer: "c"
     }
 ];
 
@@ -84,10 +84,10 @@ function generateQuestion() {
     }
     var currentQuestion = questionsArray[currentIndex];
     quizQuestions.innerHTML = "<p>" + currentQuestion.question + "</p>";
-    choiceA.innerHTML = currentQuestion.choiceA;
-    choiceB.innerHTML = currentQuestion.choiceB;
-    choiceC.innerHTML = currentQuestion.choiceC;
-    choiceD.innerHTML = currentQuestion.choiceD;
+    answerA.innerHTML = currentQuestion.answerA;
+    answerB.innerHTML = currentQuestion.answerB;
+    answerC.innerHTML = currentQuestion.answerC;
+    answerD.innerHTML = currentQuestion.answerD;
 };
 
 function startFunction() {
@@ -104,15 +104,15 @@ function startFunction() {
         }
     }, 1000);
     theQuiz.style.display = "block"
-}
+};
 
 function showScore() {
     theQuiz.style.display = "none";
     gameOver.style.display = "flex";
     clearInterval(timeInterval);
     inputInitials.value = "";
-    scoreTotal.innerHTML = "You scored" + score + "/" + quizQuestions.length + " questions.";
-}
+    scoreTotal.innerHTML = "You scored" + score + "/" + questionsArray.length + " questions.";
+};
 
 saveButton.addEventListener("click", function highscores() {
     if (inputInitials.value === "") {
@@ -145,7 +145,7 @@ function generateScores() {
         scoreName.appendChild(newInitials);
         scoreTotal.appendChild(newScore);
     }
-}
+};
 
 function showScoreBoard() {
     startMenu.style.display = "none";
@@ -154,13 +154,13 @@ function showScoreBoard() {
     scoreBoard.style.display = "block";
     finishLine.style.display = "flex";
     generateScores();
-}
+};
 
 function deleteScore() {
     window.localStorage.clear();
     scoreName.textContent = "";
     scoreTotal.textContent = "";
-}
+};
 
 function playAgain() {
     scoreContainers.style.display = "none";
@@ -169,5 +169,21 @@ function playAgain() {
     timeRemains = 60;
     score = 0;
     currentIndex = 0;
-}
+};
 
+function checkQuestion(answer) {
+    correct = questionsArray[currentIndex].correctAnswer;
+    if (answer === correct && currentIndex !== lastQuestionIndex) {
+        score++;
+        currentIndex++;
+        generateQuestion();
+    } else if (answer !== correct && currentIndex !== lastQuestionIndex) {
+        currentIndex++;
+        timeRemains = timeRemains - 12;
+        generateQuestion();
+    } else {
+        showScore();
+    }
+};
+
+startButton.addEventListener("click", startFunction);
