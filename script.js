@@ -139,9 +139,11 @@ function generateScores() {
     scoreName.innerHTML = "";
     scoreTotal.innerHTML = "";
     var highscores = JSON.parse(localStorage.getItem("savedScores")) || [];
-    for (i=0; i<highscores.length; i++) {
+    for (i=0; i < highscores.length; i++) {
+        var newInitials = document.createElement("div");
+        var newScore = document.createElement("div");
         newInitials.textContent = highscores[i].name;
-        newScore.textContent = highscores[i].name;
+        newScore.textContent = highscores[i].score;
         scoreName.appendChild(newInitials);
         scoreTotal.appendChild(newScore);
     }
