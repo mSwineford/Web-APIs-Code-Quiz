@@ -73,6 +73,7 @@ var questionsArray = [
 var lastQuestionIndex = questionsArray.length;
 var currentIndex = 0;
 var timeRemains = 60;
+var timeInterval;
 var score = 0;
 var correct;
 
@@ -88,4 +89,28 @@ function generateQuestion() {
     choiceC.innerHTML = currentQuestion.choiceC;
     choiceD.innerHTML = currentQuestion.choiceD;
 };
+
+function startFunction() {
+    gameOver.style.display = "none";
+    startMenu.style.display = "none";
+    generateQuestion();
+
+    timeInterval = setInterval(function() {
+        timeRemains--;
+        stopWatch.textContent = "Remaining Time: " + timeRemains;
+        if(timeRemains === 0) {
+            clearInterval(timeInterval);
+            showScore();
+        }
+    }, 1000);
+    theQuiz.style.display = "block"
+}
+
+function showScore() {
+    theQuiz.style.display = "none";
+    gameOver.style.display = "flex";
+    clearInterval(timeInterval);
+    scoreName.value = "";
+    scoreTotal.innerHTML = "You scored" + score + "/" + quizQuestions.length + " questions.";
+}
 
