@@ -7,6 +7,42 @@
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-    
+    <div class="container">
+        <div id="start">
+            <h1>Coding Quiz!</h1>
+            <button id="startbtn">Begin the Quiz</button>
+            <button id="highScorebtn" onclick="tohighScore()">Scoreboard</button>
+        </div>
+
+        <div id="quiz">
+            <div id="clock">Time: </div>
+            <div id="questions"><p>Question</p></div>
+            <button id="a" onclick="check('a')">a</button>
+            <button id="b" onclick="check('b')">b</button>
+            <button id="c" onclick="check('c')">c</button>
+            <button id="d" onclick="check('d')">d</button>
+            <div id="solution"></div>
+        </div>
+        <div id="gameOver">
+            <div id="grade"></div>
+            <input type="text" placeholder="Input your initials  to save yor high score!" name="initials" id="initials"/>
+            <button id="saveScore">Save Score</button>
+        </div>
+        <div id="scoreContainer">
+            <div id="scoreBoard">
+                <div id="scoreTitle">
+                    <h2>Initials</h2>
+                    <h3>High Score</h3>
+                </div>
+                <div id="scoreInitials"></div>
+                <div id="finalScore"></div>
+                <div id="finish">
+                    <button id="tryAgain" onclick="replayQuiz()">Want to try again?</button>
+                    <button id="deleteScores" onclick="deleteScore()">Delete Sccores</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
