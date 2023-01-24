@@ -23,4 +23,9 @@ var saveButton = document.getElementById("saveScore");
 var scoreContainers = document.getElementById("scoreContainer");
 var scoreBoard = document.getElementById("scoreBoard");
 var finishLine = document.getElementById("finish");
+var scoreName = document.getElementById("scoreInitials");
 var scoreTotal = document.getElementById("finalScore");
+
+var questionsArray = [{
+    
+}]
