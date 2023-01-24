@@ -69,3 +69,23 @@ var questionsArray = [
         correct: "c"
     }
 ];
+
+var lastQuestionIndex = questionsArray.length;
+var currentIndex = 0;
+var timeRemains = 60;
+var score = 0;
+var correct;
+
+function generateQuestion() {
+    gameOver.style.display = "none";
+    if (currentIndex === lastQuestionIndex) {
+        return showScore;
+    }
+    var currentQuestion = questionsArray[currentIndex];
+    quizQuestions.innerHTML = "<p>" + currentQuestion.question + "</p>";
+    choiceA.innerHTML = currentQuestion.choiceA;
+    choiceB.innerHTML = currentQuestion.choiceB;
+    choiceC.innerHTML = currentQuestion.choiceC;
+    choiceD.innerHTML = currentQuestion.choiceD;
+};
+
